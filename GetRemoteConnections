@@ -1,0 +1,10 @@
+foreach($line in Get-Content -Path C:\hosts.txt) 
+{
+    Enter-PSSession $line 
+
+    Write-Output $line | Out-File -FilePath C:\hostsoutput.txt -Append
+    Get-NetTCPConnection -State Established | Out-File -FilePath C:\hostsoutput.txt -Append
+
+    Exit-PSSession
+
+}
